@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BODEGA_SACModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TB_CATEGORY">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY" />
+          </Key>
+          <Property Name="ID_CATEGORY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_CATEGORY" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DESCRIPTION_CATEGORY" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="STATUS_CATEGORY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_CUSTOMER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_CUSTOMER" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DNI_CUSTOMER" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="STATUS_CUSTOMER" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DEBT">
+          <Key>
+            <PropertyRef Name="ID_DEBT" />
+          </Key>
+          <Property Name="ID_DEBT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_SALE" Type="int" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="int" Nullable="false" />
+          <Property Name="TOTAL_SALE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_PAID_SALE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_TO_PAY_SALE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STATUS_DEBT" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DETAIL_SALE">
+          <Key>
+            <PropertyRef Name="ID_DETAIL_SALE" />
+          </Key>
+          <Property Name="ID_SALE" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUCT" Type="int" Nullable="false" />
+          <Property Name="PRICE_PRODUCT_SALE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_PRODUCT_SALE" Type="int" Nullable="false" />
+          <Property Name="ID_DETAIL_SALE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_EMPLOYEE" />
+          </Key>
+          <Property Name="ID_EMPLOYEE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_EMPLOYEE" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="LAST_NAME_EMPLOYEE" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DNI_EMPLOYEE" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="STATUS_EMPLOYEE" Type="int" Nullable="false" />
+          <Property Name="ID_ROLE_EMPLOYEE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_LOGIN_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_LOGIN" />
+          </Key>
+          <Property Name="ID_LOGIN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPLOYEE" Type="int" Nullable="false" />
+          <Property Name="USER_EMPLOYEE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PASSWORD_EMPLOYEE" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_PRODUCT">
+          <Key>
+            <PropertyRef Name="ID_PRODUCT" />
+          </Key>
+          <Property Name="ID_PRODUCT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_PRODUCT" Type="int" Nullable="false" />
+          <Property Name="NAME_PRODUCT" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DESCRIPTION_PRODUCT" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PRICE_PRODUCT" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STOCK_PRODUCT" Type="int" Nullable="false" />
+          <Property Name="STATUS_PRODUCT" Type="int" Nullable="false" />
+          <Property Name="ID_CATEGORY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_ROLE_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_ROLE_EMPLOYEE" />
+          </Key>
+          <Property Name="ID_ROLE_EMPLOYEE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE_ROLE_EMPLOYEE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="NAME_ROLE_EMPLOYEE" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SALE">
+          <Key>
+            <PropertyRef Name="ID_SALE" />
+          </Key>
+          <Property Name="ID_SALE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPLOYEE" Type="int" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="int" Nullable="false" />
+          <Property Name="DATE_SALE" Type="datetime" Nullable="false" />
+          <Property Name="TOTAL_SALE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STATUS_SALE" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DEBT_CUSTOMER">
+          <End Role="TB_CUSTOMER" Type="Self.TB_CUSTOMER" Multiplicity="1" />
+          <End Role="TB_DEBT" Type="Self.TB_DEBT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="TB_DEBT">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEBT_SALE">
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="1" />
+          <End Role="TB_DEBT" Type="Self.TB_DEBT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SALE">
+              <PropertyRef Name="ID_SALE" />
+            </Principal>
+            <Dependent Role="TB_DEBT">
+              <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_SALE_PRODUCT">
+          <End Role="TB_PRODUCT" Type="Self.TB_PRODUCT" Multiplicity="1" />
+          <End Role="TB_DETAIL_SALE" Type="Self.TB_DETAIL_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PRODUCT">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Principal>
+            <Dependent Role="TB_DETAIL_SALE">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_SALE_SALE">
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="1" />
+          <End Role="TB_DETAIL_SALE" Type="Self.TB_DETAIL_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SALE">
+              <PropertyRef Name="ID_SALE" />
+            </Principal>
+            <Dependent Role="TB_DETAIL_SALE">
+              <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLOYEE_ROLE_EMPLOYEE">
+          <End Role="TB_ROLE_EMPLOYEE" Type="Self.TB_ROLE_EMPLOYEE" Multiplicity="1" />
+          <End Role="TB_EMPLOYEE" Type="Self.TB_EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ROLE_EMPLOYEE">
+              <PropertyRef Name="ID_ROLE_EMPLOYEE" />
+            </Principal>
+            <Dependent Role="TB_EMPLOYEE">
+              <PropertyRef Name="ID_ROLE_EMPLOYEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CATEGORY">
+          <End Role="TB_CATEGORY" Type="Self.TB_CATEGORY" Multiplicity="1" />
+          <End Role="TB_PRODUCT" Type="Self.TB_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CATEGORY">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Principal>
+            <Dependent Role="TB_PRODUCT">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALE_CUSTOMER">
+          <End Role="TB_CUSTOMER" Type="Self.TB_CUSTOMER" Multiplicity="1" />
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="TB_SALE">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALE_EMPLOYEE">
+          <End Role="TB_EMPLOYEE" Type="Self.TB_EMPLOYEE" Multiplicity="1" />
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_EMPLOYEE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Principal>
+            <Dependent Role="TB_SALE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BODEGA_SACModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CATEGORY" EntityType="Self.TB_CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CUSTOMER" EntityType="Self.TB_CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DEBT" EntityType="Self.TB_DEBT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DETAIL_SALE" EntityType="Self.TB_DETAIL_SALE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_EMPLOYEE" EntityType="Self.TB_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_LOGIN_EMPLOYEE" EntityType="Self.TB_LOGIN_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PRODUCT" EntityType="Self.TB_PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_ROLE_EMPLOYEE" EntityType="Self.TB_ROLE_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SALE" EntityType="Self.TB_SALE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DEBT_CUSTOMER" Association="Self.FK_DEBT_CUSTOMER">
+            <End Role="TB_CUSTOMER" EntitySet="TB_CUSTOMER" />
+            <End Role="TB_DEBT" EntitySet="TB_DEBT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEBT_SALE" Association="Self.FK_DEBT_SALE">
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+            <End Role="TB_DEBT" EntitySet="TB_DEBT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_SALE_PRODUCT" Association="Self.FK_DETAIL_SALE_PRODUCT">
+            <End Role="TB_PRODUCT" EntitySet="TB_PRODUCT" />
+            <End Role="TB_DETAIL_SALE" EntitySet="TB_DETAIL_SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_SALE_SALE" Association="Self.FK_DETAIL_SALE_SALE">
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+            <End Role="TB_DETAIL_SALE" EntitySet="TB_DETAIL_SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLOYEE_ROLE_EMPLOYEE" Association="Self.FK_EMPLOYEE_ROLE_EMPLOYEE">
+            <End Role="TB_ROLE_EMPLOYEE" EntitySet="TB_ROLE_EMPLOYEE" />
+            <End Role="TB_EMPLOYEE" EntitySet="TB_EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CATEGORY" Association="Self.FK_PRODUCT_CATEGORY">
+            <End Role="TB_CATEGORY" EntitySet="TB_CATEGORY" />
+            <End Role="TB_PRODUCT" EntitySet="TB_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALE_CUSTOMER" Association="Self.FK_SALE_CUSTOMER">
+            <End Role="TB_CUSTOMER" EntitySet="TB_CUSTOMER" />
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALE_EMPLOYEE" Association="Self.FK_SALE_EMPLOYEE">
+            <End Role="TB_EMPLOYEE" EntitySet="TB_EMPLOYEE" />
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BODEGA_SACModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TB_CATEGORY">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY" />
+          </Key>
+          <Property Name="ID_CATEGORY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_CATEGORY" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS_CATEGORY" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_PRODUCT" Relationship="Self.FK_PRODUCT_CATEGORY" FromRole="TB_CATEGORY" ToRole="TB_PRODUCT" />
+        </EntityType>
+        <EntityType Name="TB_CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_CUSTOMER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_CUSTOMER" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI_CUSTOMER" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="STATUS_CUSTOMER" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_DEBT" Relationship="Self.FK_DEBT_CUSTOMER" FromRole="TB_CUSTOMER" ToRole="TB_DEBT" />
+          <NavigationProperty Name="TB_SALE" Relationship="Self.FK_SALE_CUSTOMER" FromRole="TB_CUSTOMER" ToRole="TB_SALE" />
+        </EntityType>
+        <EntityType Name="TB_DEBT">
+          <Key>
+            <PropertyRef Name="ID_DEBT" />
+          </Key>
+          <Property Name="ID_DEBT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_SALE" Type="Int32" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="Int32" Nullable="false" />
+          <Property Name="TOTAL_SALE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_PAID_SALE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_TO_PAY_SALE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STATUS_DEBT" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_CUSTOMER" Relationship="Self.FK_DEBT_CUSTOMER" FromRole="TB_DEBT" ToRole="TB_CUSTOMER" />
+          <NavigationProperty Name="TB_SALE" Relationship="Self.FK_DEBT_SALE" FromRole="TB_DEBT" ToRole="TB_SALE" />
+        </EntityType>
+        <EntityType Name="TB_DETAIL_SALE">
+          <Key>
+            <PropertyRef Name="ID_DETAIL_SALE" />
+          </Key>
+          <Property Name="ID_SALE" Type="Int32" Nullable="false" />
+          <Property Name="ID_PRODUCT" Type="Int32" Nullable="false" />
+          <Property Name="PRICE_PRODUCT_SALE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AMOUNT_PRODUCT_SALE" Type="Int32" Nullable="false" />
+          <Property Name="ID_DETAIL_SALE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="TB_PRODUCT" Relationship="Self.FK_DETAIL_SALE_PRODUCT" FromRole="TB_DETAIL_SALE" ToRole="TB_PRODUCT" />
+          <NavigationProperty Name="TB_SALE" Relationship="Self.FK_DETAIL_SALE_SALE" FromRole="TB_DETAIL_SALE" ToRole="TB_SALE" />
+        </EntityType>
+        <EntityType Name="TB_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_EMPLOYEE" />
+          </Key>
+          <Property Name="ID_EMPLOYEE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_EMPLOYEE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LAST_NAME_EMPLOYEE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI_EMPLOYEE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS_EMPLOYEE" Type="Int32" Nullable="false" />
+          <Property Name="ID_ROLE_EMPLOYEE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_ROLE_EMPLOYEE" Relationship="Self.FK_EMPLOYEE_ROLE_EMPLOYEE" FromRole="TB_EMPLOYEE" ToRole="TB_ROLE_EMPLOYEE" />
+          <NavigationProperty Name="TB_SALE" Relationship="Self.FK_SALE_EMPLOYEE" FromRole="TB_EMPLOYEE" ToRole="TB_SALE" />
+        </EntityType>
+        <EntityType Name="TB_LOGIN_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_LOGIN" />
+          </Key>
+          <Property Name="ID_LOGIN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPLOYEE" Type="Int32" Nullable="false" />
+          <Property Name="USER_EMPLOYEE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD_EMPLOYEE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_PRODUCT">
+          <Key>
+            <PropertyRef Name="ID_PRODUCT" />
+          </Key>
+          <Property Name="ID_PRODUCT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_PRODUCT" Type="Int32" Nullable="false" />
+          <Property Name="NAME_PRODUCT" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION_PRODUCT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRICE_PRODUCT" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STOCK_PRODUCT" Type="Int32" Nullable="false" />
+          <Property Name="STATUS_PRODUCT" Type="Int32" Nullable="false" />
+          <Property Name="ID_CATEGORY" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_CATEGORY" Relationship="Self.FK_PRODUCT_CATEGORY" FromRole="TB_PRODUCT" ToRole="TB_CATEGORY" />
+          <NavigationProperty Name="TB_DETAIL_SALE" Relationship="Self.FK_DETAIL_SALE_PRODUCT" FromRole="TB_PRODUCT" ToRole="TB_DETAIL_SALE" />
+        </EntityType>
+        <EntityType Name="TB_ROLE_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_ROLE_EMPLOYEE" />
+          </Key>
+          <Property Name="ID_ROLE_EMPLOYEE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE_ROLE_EMPLOYEE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME_ROLE_EMPLOYEE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_EMPLOYEE" Relationship="Self.FK_EMPLOYEE_ROLE_EMPLOYEE" FromRole="TB_ROLE_EMPLOYEE" ToRole="TB_EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="TB_SALE">
+          <Key>
+            <PropertyRef Name="ID_SALE" />
+          </Key>
+          <Property Name="ID_SALE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPLOYEE" Type="Int32" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="Int32" Nullable="false" />
+          <Property Name="DATE_SALE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TOTAL_SALE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STATUS_SALE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_CUSTOMER" Relationship="Self.FK_SALE_CUSTOMER" FromRole="TB_SALE" ToRole="TB_CUSTOMER" />
+          <NavigationProperty Name="TB_DEBT" Relationship="Self.FK_DEBT_SALE" FromRole="TB_SALE" ToRole="TB_DEBT" />
+          <NavigationProperty Name="TB_DETAIL_SALE" Relationship="Self.FK_DETAIL_SALE_SALE" FromRole="TB_SALE" ToRole="TB_DETAIL_SALE" />
+          <NavigationProperty Name="TB_EMPLOYEE" Relationship="Self.FK_SALE_EMPLOYEE" FromRole="TB_SALE" ToRole="TB_EMPLOYEE" />
+        </EntityType>
+        <Association Name="FK_PRODUCT_CATEGORY">
+          <End Role="TB_CATEGORY" Type="Self.TB_CATEGORY" Multiplicity="1" />
+          <End Role="TB_PRODUCT" Type="Self.TB_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CATEGORY">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Principal>
+            <Dependent Role="TB_PRODUCT">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEBT_CUSTOMER">
+          <End Role="TB_CUSTOMER" Type="Self.TB_CUSTOMER" Multiplicity="1" />
+          <End Role="TB_DEBT" Type="Self.TB_DEBT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="TB_DEBT">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALE_CUSTOMER">
+          <End Role="TB_CUSTOMER" Type="Self.TB_CUSTOMER" Multiplicity="1" />
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="TB_SALE">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEBT_SALE">
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="1" />
+          <End Role="TB_DEBT" Type="Self.TB_DEBT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SALE">
+              <PropertyRef Name="ID_SALE" />
+            </Principal>
+            <Dependent Role="TB_DEBT">
+              <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_SALE_PRODUCT">
+          <End Role="TB_PRODUCT" Type="Self.TB_PRODUCT" Multiplicity="1" />
+          <End Role="TB_DETAIL_SALE" Type="Self.TB_DETAIL_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PRODUCT">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Principal>
+            <Dependent Role="TB_DETAIL_SALE">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_SALE_SALE">
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="1" />
+          <End Role="TB_DETAIL_SALE" Type="Self.TB_DETAIL_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SALE">
+              <PropertyRef Name="ID_SALE" />
+            </Principal>
+            <Dependent Role="TB_DETAIL_SALE">
+              <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLOYEE_ROLE_EMPLOYEE">
+          <End Role="TB_ROLE_EMPLOYEE" Type="Self.TB_ROLE_EMPLOYEE" Multiplicity="1" />
+          <End Role="TB_EMPLOYEE" Type="Self.TB_EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ROLE_EMPLOYEE">
+              <PropertyRef Name="ID_ROLE_EMPLOYEE" />
+            </Principal>
+            <Dependent Role="TB_EMPLOYEE">
+              <PropertyRef Name="ID_ROLE_EMPLOYEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALE_EMPLOYEE">
+          <End Role="TB_EMPLOYEE" Type="Self.TB_EMPLOYEE" Multiplicity="1" />
+          <End Role="TB_SALE" Type="Self.TB_SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_EMPLOYEE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Principal>
+            <Dependent Role="TB_SALE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BODEGA_SACEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TB_CATEGORY" EntityType="Self.TB_CATEGORY" />
+          <EntitySet Name="TB_CUSTOMER" EntityType="Self.TB_CUSTOMER" />
+          <EntitySet Name="TB_DEBT" EntityType="Self.TB_DEBT" />
+          <EntitySet Name="TB_DETAIL_SALE" EntityType="Self.TB_DETAIL_SALE" />
+          <EntitySet Name="TB_EMPLOYEE" EntityType="Self.TB_EMPLOYEE" />
+          <EntitySet Name="TB_LOGIN_EMPLOYEE" EntityType="Self.TB_LOGIN_EMPLOYEE" />
+          <EntitySet Name="TB_PRODUCT" EntityType="Self.TB_PRODUCT" />
+          <EntitySet Name="TB_ROLE_EMPLOYEE" EntityType="Self.TB_ROLE_EMPLOYEE" />
+          <EntitySet Name="TB_SALE" EntityType="Self.TB_SALE" />
+          <AssociationSet Name="FK_PRODUCT_CATEGORY" Association="Self.FK_PRODUCT_CATEGORY">
+            <End Role="TB_CATEGORY" EntitySet="TB_CATEGORY" />
+            <End Role="TB_PRODUCT" EntitySet="TB_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEBT_CUSTOMER" Association="Self.FK_DEBT_CUSTOMER">
+            <End Role="TB_CUSTOMER" EntitySet="TB_CUSTOMER" />
+            <End Role="TB_DEBT" EntitySet="TB_DEBT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALE_CUSTOMER" Association="Self.FK_SALE_CUSTOMER">
+            <End Role="TB_CUSTOMER" EntitySet="TB_CUSTOMER" />
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEBT_SALE" Association="Self.FK_DEBT_SALE">
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+            <End Role="TB_DEBT" EntitySet="TB_DEBT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_SALE_PRODUCT" Association="Self.FK_DETAIL_SALE_PRODUCT">
+            <End Role="TB_PRODUCT" EntitySet="TB_PRODUCT" />
+            <End Role="TB_DETAIL_SALE" EntitySet="TB_DETAIL_SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_SALE_SALE" Association="Self.FK_DETAIL_SALE_SALE">
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+            <End Role="TB_DETAIL_SALE" EntitySet="TB_DETAIL_SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLOYEE_ROLE_EMPLOYEE" Association="Self.FK_EMPLOYEE_ROLE_EMPLOYEE">
+            <End Role="TB_ROLE_EMPLOYEE" EntitySet="TB_ROLE_EMPLOYEE" />
+            <End Role="TB_EMPLOYEE" EntitySet="TB_EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALE_EMPLOYEE" Association="Self.FK_SALE_EMPLOYEE">
+            <End Role="TB_EMPLOYEE" EntitySet="TB_EMPLOYEE" />
+            <End Role="TB_SALE" EntitySet="TB_SALE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BODEGA_SACModelStoreContainer" CdmEntityContainer="BODEGA_SACEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CATEGORY">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_CATEGORY">
+              <MappingFragment StoreEntitySet="TB_CATEGORY">
+                <ScalarProperty Name="ID_CATEGORY" ColumnName="ID_CATEGORY" />
+                <ScalarProperty Name="NAME_CATEGORY" ColumnName="NAME_CATEGORY" />
+                <ScalarProperty Name="DESCRIPTION_CATEGORY" ColumnName="DESCRIPTION_CATEGORY" />
+                <ScalarProperty Name="STATUS_CATEGORY" ColumnName="STATUS_CATEGORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CUSTOMER">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_CUSTOMER">
+              <MappingFragment StoreEntitySet="TB_CUSTOMER">
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="NAME_CUSTOMER" ColumnName="NAME_CUSTOMER" />
+                <ScalarProperty Name="DNI_CUSTOMER" ColumnName="DNI_CUSTOMER" />
+                <ScalarProperty Name="STATUS_CUSTOMER" ColumnName="STATUS_CUSTOMER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DEBT">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_DEBT">
+              <MappingFragment StoreEntitySet="TB_DEBT">
+                <ScalarProperty Name="ID_DEBT" ColumnName="ID_DEBT" />
+                <ScalarProperty Name="ID_SALE" ColumnName="ID_SALE" />
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="TOTAL_SALE" ColumnName="TOTAL_SALE" />
+                <ScalarProperty Name="AMOUNT_PAID_SALE" ColumnName="AMOUNT_PAID_SALE" />
+                <ScalarProperty Name="AMOUNT_TO_PAY_SALE" ColumnName="AMOUNT_TO_PAY_SALE" />
+                <ScalarProperty Name="STATUS_DEBT" ColumnName="STATUS_DEBT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DETAIL_SALE">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_DETAIL_SALE">
+              <MappingFragment StoreEntitySet="TB_DETAIL_SALE">
+                <ScalarProperty Name="ID_SALE" ColumnName="ID_SALE" />
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="PRICE_PRODUCT_SALE" ColumnName="PRICE_PRODUCT_SALE" />
+                <ScalarProperty Name="AMOUNT_PRODUCT_SALE" ColumnName="AMOUNT_PRODUCT_SALE" />
+                <ScalarProperty Name="ID_DETAIL_SALE" ColumnName="ID_DETAIL_SALE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_EMPLOYEE">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_EMPLOYEE">
+              <MappingFragment StoreEntitySet="TB_EMPLOYEE">
+                <ScalarProperty Name="ID_EMPLOYEE" ColumnName="ID_EMPLOYEE" />
+                <ScalarProperty Name="NAME_EMPLOYEE" ColumnName="NAME_EMPLOYEE" />
+                <ScalarProperty Name="LAST_NAME_EMPLOYEE" ColumnName="LAST_NAME_EMPLOYEE" />
+                <ScalarProperty Name="DNI_EMPLOYEE" ColumnName="DNI_EMPLOYEE" />
+                <ScalarProperty Name="STATUS_EMPLOYEE" ColumnName="STATUS_EMPLOYEE" />
+                <ScalarProperty Name="ID_ROLE_EMPLOYEE" ColumnName="ID_ROLE_EMPLOYEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LOGIN_EMPLOYEE">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_LOGIN_EMPLOYEE">
+              <MappingFragment StoreEntitySet="TB_LOGIN_EMPLOYEE">
+                <ScalarProperty Name="ID_LOGIN" ColumnName="ID_LOGIN" />
+                <ScalarProperty Name="ID_EMPLOYEE" ColumnName="ID_EMPLOYEE" />
+                <ScalarProperty Name="USER_EMPLOYEE" ColumnName="USER_EMPLOYEE" />
+                <ScalarProperty Name="PASSWORD_EMPLOYEE" ColumnName="PASSWORD_EMPLOYEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PRODUCT">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_PRODUCT">
+              <MappingFragment StoreEntitySet="TB_PRODUCT">
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="CODE_PRODUCT" ColumnName="CODE_PRODUCT" />
+                <ScalarProperty Name="NAME_PRODUCT" ColumnName="NAME_PRODUCT" />
+                <ScalarProperty Name="DESCRIPTION_PRODUCT" ColumnName="DESCRIPTION_PRODUCT" />
+                <ScalarProperty Name="PRICE_PRODUCT" ColumnName="PRICE_PRODUCT" />
+                <ScalarProperty Name="STOCK_PRODUCT" ColumnName="STOCK_PRODUCT" />
+                <ScalarProperty Name="STATUS_PRODUCT" ColumnName="STATUS_PRODUCT" />
+                <ScalarProperty Name="ID_CATEGORY" ColumnName="ID_CATEGORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ROLE_EMPLOYEE">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_ROLE_EMPLOYEE">
+              <MappingFragment StoreEntitySet="TB_ROLE_EMPLOYEE">
+                <ScalarProperty Name="ID_ROLE_EMPLOYEE" ColumnName="ID_ROLE_EMPLOYEE" />
+                <ScalarProperty Name="CODE_ROLE_EMPLOYEE" ColumnName="CODE_ROLE_EMPLOYEE" />
+                <ScalarProperty Name="NAME_ROLE_EMPLOYEE" ColumnName="NAME_ROLE_EMPLOYEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_SALE">
+            <EntityTypeMapping TypeName="BODEGA_SACModel.TB_SALE">
+              <MappingFragment StoreEntitySet="TB_SALE">
+                <ScalarProperty Name="ID_SALE" ColumnName="ID_SALE" />
+                <ScalarProperty Name="ID_EMPLOYEE" ColumnName="ID_EMPLOYEE" />
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="DATE_SALE" ColumnName="DATE_SALE" />
+                <ScalarProperty Name="TOTAL_SALE" ColumnName="TOTAL_SALE" />
+                <ScalarProperty Name="STATUS_SALE" ColumnName="STATUS_SALE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

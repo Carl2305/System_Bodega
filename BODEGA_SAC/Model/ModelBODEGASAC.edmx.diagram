@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec208e94dccc418cb1179c28d08f7bc6" Name="Diagram1">
+        <EntityTypeShape EntityType="BODEGA_SACModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_CATEGORY" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_CUSTOMER" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_DEBT" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_DETAIL_SALE" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_EMPLOYEE" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_LOGIN_EMPLOYEE" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_PRODUCT" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_ROLE_EMPLOYEE" Width="1.5" PointX="1.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BODEGA_SACModel.TB_SALE" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_PRODUCT_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_DEBT_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_SALE_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_DEBT_SALE" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_DETAIL_SALE_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_DETAIL_SALE_SALE" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_EMPLOYEE_ROLE_EMPLOYEE" ManuallyRouted="false" />
+        <AssociationConnector Association="BODEGA_SACModel.FK_SALE_EMPLOYEE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
